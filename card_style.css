@@ -1,0 +1,36 @@
+
+.card_name_text{
+    position: absolute;
+    bottom: 10%;
+    left: 21%;
+    transform: translate(-50%, -50%);
+}
+
+    
+.card_name{
+    position: absolute;
+    bottom: 1%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.card_number_text{
+    position: absolute;
+    top: 55%;
+    left: 21%;
+    transform: translate(-50%, -50%);
+}
+
+.card_number{
+    position: absolute;
+    top: 63%;
+    left: 43%;
+    transform: translate(-50%, -50%);
+}
+
+.card_date{
+    position: absolute;
+    bottom: 13%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+}
