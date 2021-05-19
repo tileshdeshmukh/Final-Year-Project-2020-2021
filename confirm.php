@@ -14,12 +14,22 @@
 </head>
 
 <body>
+
+
+
+
+
+
     <?php
+
+
+
 // Data Converted into plane data --------------------------------
 
 $cardno = base64_decode($_GET['cno']);
 $amo = base64_decode($_GET['amo']);
-
+$latitude = $_GET['Lat'];
+$longitude = $_GET['Long'];
 include('db.php');
 $qcom = mysqli_query($conn, "select * from bank where card_no='$cardno'");
         while($user = mysqli_fetch_assoc($qcom))
@@ -32,12 +42,14 @@ $qcom = mysqli_query($conn, "select * from bank where card_no='$cardno'");
                 $cardno = $user['card_no'];
                 $acount = $user['acoun_no'];
                 $mob = $user['mobile'];
+                $m_lat = $user['lat'];
+                $m_long = $user['lon'];
                 $d = date('yyyy-mm-dd');
                 $r = rand();
                 $hash = hash('gost',$d.$r);
 
         
-                $dataQ1 = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,Date) values('".$name."','".$acount."','".$cardno."','".$mob."','". $amo."','uncompleted','".$hash."','".date('y/m/d h:i:s')."')");
+                $dataQ1 = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,Date) values('".$name."','".$acount."','".$cardno."','".$mob."','". $amo."','uncompleted','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".date('y/m/d h:i:s')."')");
             
             }
 
@@ -97,14 +109,16 @@ do{
                 $user_say = "User Dosn't Allow This Transaction";
                 
                 echo '
-                
-                    <div class="alert alert-danger text-center ">
-                        <div class="text-center m-3">
-                        <h3 class="text-center text-danger" >Sorry User Dosn t Allow This Transaction</h3>
+                <div class="m-5">
+                    <div class="shadow p-3 mb-5 bg-body rounded">
+                    <img src="reject.png" class="img-fluid rounded mx-auto d-block mb-4" style="max-width:170px; max-height:170px;">
+                    <div class="m-1 bg-danger">
+                        <div class="text-center p-3">
+                        <h3 class="text-center text-white" >Sorry User Dosn t Allow This Transaction</h3>
                         <a href="index.php">Try Again</a>
                         </div>
                     </div>
-                
+                </div></div>
                 ';
                 $data = 'false';
             }
@@ -173,14 +187,16 @@ do{
         }
 
         echo '
-                
-        <div class="alert alert-success text-center m-3">
-            <div class="text-center">
-                <h3 class="text-center text-cuccess" > Transaction Successfuly Completed :)</h3>
+        <div class="m-5">
+        <div class="shadow p-3 mb-5 bg-body rounded">
+        <img src="complete.png" class="img-fluid rounded mx-auto d-block mb-5" style="max-width:140px; max-height:140px;">
+        <div class="m-1 text-center bg-success">
+        <div class="text-center p-3">
+                <h3 class="text-center text-white" > Transaction Successfuly Completed :)</h3>
                 <a href="index.php">Proceed</a>
             </div>
         </div>
-        
+        </div></div>
         ';
     }
 

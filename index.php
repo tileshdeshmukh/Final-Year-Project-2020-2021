@@ -51,6 +51,7 @@
 
     </div>
     <div class="homep">
+
         
         <div class="card shadow p-3 mb-5 bg-light rounded m-5 ">
 
@@ -74,6 +75,7 @@
 
         </div>
     </div>
+
 
     <?php
 if(isset($_POST['btn']))

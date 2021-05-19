@@ -110,7 +110,7 @@ $no = $_GET['ano'];
                         </p>
                         
                         <p class="card-text">
-                        <p class="text-center"><a href="money_transfer.php?ano=<?php echo $_GET['ano']; ?>">Transaction</a></p>
+                        <p class="text-center"><a href="money_transfer.php?ano=<?php echo $_GET['ano']; ?>" class="btn btn-info">Transaction</a></p>
                         </p>
                     </div>
                 </div>

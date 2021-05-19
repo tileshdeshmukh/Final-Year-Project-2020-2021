@@ -169,7 +169,7 @@
 
 
 
-
+  
         // Only 20 meter distance valide transaction ------------------------------------------------------
 
         if (dist <= 0.021) {
@@ -178,7 +178,7 @@
             //end
 
             window.location.href =
-                "http://localhost/project2020/contract.php?cno=<?php echo base64_encode($_POST['cno']); ?>&amo=<?php echo base64_encode($amo);?>&status=<?php echo 'match';?>";
+                "http://localhost/project2020/contract.php?cno=<?php echo base64_encode($_POST['cno']); ?>&amo=<?php echo base64_encode($amo);?>&status=<?php echo 'match';?>&Lat="+Lat+"&Long="+Long;
 
         } else {
 
@@ -191,7 +191,7 @@
             if (allowe) {
                 //send the alert sms to user mobile
                 window.location.href =
-                "http://localhost/project2020/confirm.php?cno=<?php echo base64_encode($_POST['cno']);?>&amo=<?php echo base64_encode($amo);?>";
+                "http://localhost/project2020/confirm.php?cno=<?php echo base64_encode($_POST['cno']);?>&amo=<?php echo base64_encode($amo);?>&Lat="+Lat+"&Long="+Long;
                 
             }
             else

@@ -4,7 +4,8 @@
     $amo = base64_decode($_GET['amo']);
     $cardno = trim($cno);
     $loc_status = trim($_GET['status']);
-
+    $latitude = $_GET['Lat'];
+    $longitude = $_GET['Long'];
                             
     date_default_timezone_set('Asia/Kolkata'); 
                            
@@ -19,12 +20,19 @@
             //<!-- Payment transfer -->
              $current_balance = $data['balance'];
              $transf_balance = $amo;
-            // $mobil_b = $data['mobile'];
-            // $name = $data['name'];
-            // $acount = $data['acoun_no'];
+             $m_lat = $data['lat'];
+             $m_long = $data['lon'];
+             $mobil_b = $data['mobile'];
+            $name = $data['name'];
+            $acount = $data['acoun_no'];
+
             //cut balance
             $new_balance = $current_balance - $transf_balance;
-                                    
+                          
+            $d = date('yyyy-mm-dd');
+            $r = rand();
+            $hash = hash('gost',$d.$r);
+
             //transaction mine
             if($new_balance)
             {
@@ -42,7 +50,7 @@
                         {
                             // Insert personal account Transaction Data 
         
-                            $dataQ = mysqli_query($conn, "insert into data(name,acount_no,card_no,amount,status,Date) values('".$name."','".$acount."','".$cardno."','". $transf_balance."','completed','".date('y/m/d h:i:s')."')");
+                            $dataQ = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,Date) values('".$name."','".$acount."','".$cardno."','".$mobil_b."','". $transf_balance."','completed','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".date('y/m/d h:i:s')."')");
                             // end
                                         
                             if($dataQ == true)

@@ -119,19 +119,22 @@ $no = $_GET['ano'];
                     <!-- Customer Details -->
                     <h3 class="mx-5">Transactions Details :</h3>
                     <hr>
-                    <div class="m-5">
+                    <div class="m-4">
                         
-                        <table class="table table-hover">
+                        <table class="table table-hover table-responsive">
                                     <thead>
 
                                         <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Acount No</th>
+
                                         <th scope="col">Card No</th>
-                                        <th scope="col">Amount</th>
+                                        <th scope="col">Rs.</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">DAteTime</th>
+                                        <th scope="col">DateTime</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Customer Location</th>
+                                        <th scope="col"></th>
+                                        
                                         </tr>
                                         
                                     </thead>
@@ -145,13 +148,14 @@ $no = $_GET['ano'];
 
                                         <tr>
                                         <th scope="row"><?php echo $dataT['id'];?></th>
-                                        <td><?php echo $dataT['name'];?></td>
-                                        <td><?php echo $dataT['acount_no'];?></td>
+
                                         <td><?php echo $dataT['card_no'];?></td>
                                         <td><?php echo $dataT['amount'];?></td>
                                         <td><?php echo $dataT['status'];?></td>
                                         <td><?php echo $dataT['Date'];?></td>
-                                        
+                                        <td>Lat: <?php echo $dataT['lat'];?><br>Long: <?php echo $dataT['lon'];?></td>
+                                        <td>Lat: <?php echo $dataT['m_lat'];?><br>Long: <?php echo $dataT['m_lon'];?></td>
+                                        <td><a href="open.php?id=<?php echo $dataT['id'];?>" class="btn btn-primary btn-sm">OPEN</a></td>
 
                                         </tr>
 
