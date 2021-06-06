@@ -89,7 +89,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Advance</a>
+                            <a href="datewise.php" class="text-decoration-none c_color  text-white">Advance</a>
                         </li>
                     </div>
                     <div class="p-2">
@@ -172,13 +172,14 @@
             
 ?>
 
-<table class="table">
+<table class="table text-white">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">name</th>
       <th scope="col">Acount No</th>
       <th scope="col">Data</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -190,6 +191,7 @@
       <td><?php echo $data['name']; ?></td>
       <td><?php echo $data['acount_no']; ?></td>
       <td><?php echo $data['Date']; ?></td>
+      <td><a href="open.php?id=<?php echo $data['id']; ?>" class="btn btn-primary" >OPEN</a></td>
     </tr>
  <?php } ?>
   </tbody>

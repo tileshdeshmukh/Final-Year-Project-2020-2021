@@ -19,6 +19,12 @@
     $b = mysqli_query($conn, "select * from bank where acoun_no = '110000000011' ");
     $b1 = mysqli_fetch_assoc($b);
         $admin = $b1['balance'];  
+
+
+
+
+
+
 ?>
 
 
@@ -173,86 +179,89 @@
                                             <div></div>
                                 </div>
                                 <div class="col-md-4 p-2">
-                                    <p class="text-white h5">Visited: <spam class="text-primary h4">30.06%</spam?</p>
+                                    <p class="text-white h5">Visited: <spam class="text-primary h4">30.06%</spam?< /p>
                                             <div></div>
                                 </div>
                             </div>
 
-                            <div class="row d-flex justify-content-center mx-2 mt-2 ">
-                                <div class="col-md-3">
-                                    <div class="progress blue "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">90%</div>
+                            <hr class="text-danger">
+                            <h4 class="text-white text-center">Pending Transactions </h4>
+                            <hr class="text-danger">
 
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="progress yellow "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">37.5%</div>
-                                    </div>
+                            <div class="d-flex justify-content-center mx-2 mt-2 ">
 
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="progress blue "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">90%</div>
+                                <table class="table table-responsive text-white">
+                                    <thead>
 
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="progress yellow "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">37.5%</div>
-                                    </div>
+                                        <tr>
+                                            <th scope="col">#</th>
 
-                                </div>
+                                            <th scope="col">Card No</th>
+                                            <th scope="col">Rs.</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">DateTime</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Customer Location</th>
+                                            <th scope="col"></th>
+
+                                        </tr>
+
+                                    </thead>
+                                    <?php
+                            include('db.php');
+                            $qt = mysqli_query($conn, "select * from data where status = 'pending' ORDER BY id DESC ");
+                            while($dataT=mysqli_fetch_array($qt))
+                            { ?>
+
+                                    <tbody>
+
+                                        <tr>
+                                            <th scope="row"><?php echo $dataT['id'];?></th>
+
+                                            <td><?php echo $dataT['card_no'];?></td>
+                                            <td><?php echo $dataT['amount'];?></td>
+                                            <td><?php echo $dataT['status'];?></td>
+                                            <td><?php echo $dataT['Date'];?></td>
+                                            <td>Lat: <?php echo $dataT['lat'];?><br>Long: <?php echo $dataT['lon'];?>
+                                            </td>
+                                            <td>Lat: <?php echo $dataT['m_lat'];?><br>Long:
+                                                <?php echo $dataT['m_lon'];?></td>
+                                            <td><a href="open.php?id=<?php echo $dataT['id'];?>"
+                                                    class="btn btn-primary btn-sm">OPEN</a></td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                    <?php    
+                            }
+
+                        ?>
+                                </table>
+
+
                             </div>
-
                         </div>
+
                     </div>
-
-                    <div class="row mt-1 text-center ">
-
-                        <div class="col-md-6 ">
-                            <h6 class="text-white"> Number Of Transactions Allow : <spam class="text-primary  p-1 h5"
-                                    style=" ">
-                                    <?php echo $com ?></spam>
-                            </h6>
-
-                        </div>
-                        <div class="col-md-6 ">
-                            <h6 class="text-white pb-5">Number Of Transactions Not Allow : <spam class="text-primary  p-1 h5"
-                                    style=" ">
-                                    <?php echo $fal ?></spam>
-                            </h6>
-
-                        </div>
-                        <p class="text-white h5 pt-5 pb-3">Blockchain can help in fraud detection by enabling the sharing of information in real-time and updating 
-                        the ledger upon the agreement of all parties. This will not only prevent frauds but also lower 
-                        the overall costs and time taken for the process too. Blockchain uses a shared, secure ledger to track and approve each component, or 
-                        block, within a transaction. ... Think of banking, payment processing, contracts management, wills and real estate, money transfers,
-                         and medical records—all can be better protected with blockchain.</p>
-                    </div>
-
-    <!-- pie chart -->
-
-                   
-
-
-                    <!-- ----------------------------------------------End---------------------------------------------- -->
-
-
-
-
                 </div>
 
+
+
+                <!-- pie chart -->
+
+
+
+
+                <!-- ----------------------------------------------End---------------------------------------------- -->
+
+
+
+
             </div>
+
         </div>
+    </div>
     </div>
 
     </div>

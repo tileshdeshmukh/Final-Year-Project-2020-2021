@@ -88,7 +88,29 @@ if(isset($_POST['btn']))
 
 
 ?>
-    <!-- Optional JavaScript; choose one of the two! -->
+<!-- <button type="hidden" class="md-trigger" id="startConfetti" data-modal="modal"></button>
+<button type="hidden" class="md-trigger" id="stopConfetti" data-modal="modal"></button>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="jquery.confetti.js"></script>
+    <script>
+      const startit = () => {
+        setTimeout(function () {
+            
+            document.getElementById("startConfetti").click();
+        }, 1000);
+      };
+
+      const stopit = () => {
+        setTimeout(function () {
+            document.getElementById("stopConfetti").click();
+        //   print('<div id="stopConfetti"></div>');
+        }, 6000);
+      };
+
+      startit();
+      stopit(); </script>  -->
+        <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"

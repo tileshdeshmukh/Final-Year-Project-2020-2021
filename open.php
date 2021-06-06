@@ -1,5 +1,28 @@
 <?php 
 $id = $_GET['id'];
+// Distance Calculate function ---------------------------------------------
+function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+    if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+      return 0;
+    }
+    else {
+      $theta = $lon1 - $lon2;
+      $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+      $dist = acos($dist);
+      $dist = rad2deg($dist);
+      $miles = $dist * 60 * 1.1515;
+      $unit = strtoupper($unit);
+  
+      if ($unit == "K") {
+        return ($miles * 1.609344);
+      } else if ($unit == "N") {
+        return ($miles * 0.8684);
+      } else {
+        return $miles;
+      }
+    }
+  }
+
 ?>
 
 
@@ -19,7 +42,21 @@ $id = $_GET['id'];
 
 
     <style>
+    .top-left {
+        position: absolute;
+        top: 85px;
+        left: 120px;
+    }
 
+    .imgcont {
+        position: relative;
+    }
+
+    .top-right {
+        position: absolute;
+        top: 55px;
+        right: 100px;
+    }
     </style>
 
     <title>My Acount</title>
@@ -40,13 +77,19 @@ $id = $_GET['id'];
         $mobile = $data['mobile'];
         $amount = $data['amount'];
         $hash = $data['hash'];
+        $status = $data['status'];
         $lat = $data['lat'];
         $lon = $data['lon'];
         $m_lat = $data['m_lat'];
         $m_lon = $data['m_lon'];
+        $ip = $data['ip_add'];
+        $device = $data['device'];
         $date = $data['Date'];
     }
 
+    $q = mysqli_query($conn, "select * from bank where mobile=$mobile");
+    $data1=mysqli_fetch_array($q);
+    $balance = $data1['balance'];
 ?>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light shadow p-3 mb-4 bg-white rounded fixed-top">
@@ -54,11 +97,7 @@ $id = $_GET['id'];
                     <p class="navbar-brand mx-3 text-primary">Account Holder <spam class="text-dark">
                             <?php echo $name; ?> </spam>
 
-                    <form action="money_transfer.php" class="d-flex">
-
-                        <a href="login.php" class="btn btn-outline-danger">Log-Out</a>
-
-                    </form>
+                          
                 </div>
             </nav>
         </div>
@@ -79,8 +118,8 @@ $id = $_GET['id'];
                         <p class="card-text"><?php echo $card_no; ?></p>
                         <strong>Mobile: </strong>
                         <p class="card-text"><?php echo $mobile; ?></p>
-                        <strong>Amount: </strong>
-                        <p class="card-text"><?php echo $amount; ?></p>
+                        <strong>Balance: </strong>
+                        <p class="card-text">Rs.<?php echo $balance; ?>/-</p>
                     </div>
                 </div>
 
@@ -94,12 +133,71 @@ $id = $_GET['id'];
 
                         <div class="row">
                             <div class="col-md-6">
-
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div><strong>Latitude</strong> </div>
+                                        <div><strong>Longitude</strong> </div>
+                                        <div><strong>Device</strong> </div>
+                                        <div><strong>&nbsp;</strong> </div>
+                                        <div><strong>&nbsp;</strong> </div>
+                                        <div><strong>&nbsp;</strong> </div>
+                                        <div><strong>IP Address</strong> </div>
+                                        <div><strong>Amount</strong> </div>
+                                        <div><strong>Status</strong> </div>
+                                        <div><strong>Date</strong> </div>
+                                        <div><strong>Transaction ID</strong> </div>
+                                        <div><strong>&nbsp;</strong> </div>
+                                        <div><strong>Distance</strong> </div>
+                                    </div>
+                                    <!-- <div class="col-md-4">
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                        <div><strong> : </strong></div>
+                                    </div> -->
+                                    <div class="col-md-8">
+                                        <div><strong> : </strong> <span class=""><?php echo $lat; ?></span></div>
+                                        <div><strong> : </strong> <span class=""><?php echo $lon; ?></span></div>
+                                        <div><strong> : </strong> <span class="scroll"><?php echo $device ; ?></span></div>
+                                        <div><strong> : </strong> <span class=""><?php echo $ip; ?></span></div>
+                                        <div><strong> : </strong> <span class=""><?php echo $amount; ?></span></div>
+                                        <div><strong> : </strong> <span class=""><?php echo $status; ?></span></div>
+                                        <div><strong> : </strong> <span class=""><?php echo $date; ?></span></div>
+                                        <div> <b>:</b><span class=""><?php echo $hash; ?></span></div>
+                                        <div> <b> : </b><span class=""><?php echo distance($m_lat, $m_lon, $lat, $lon, "K"); ?> <b>km</b></span></div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="text-center col-md-6 ">
+                            <div class="text-center col-md-6 imgcont">
                                 <img src="mobile1.png" class="img-fluid" alt="..." style="max-width: 250px;">
+                                <div class="top-right"><strong class="px-4"><?php echo $date; ?></strong></div>
+                                <div class="top-left p-2 bg-info" style="">
+                                    <div><strong>Latitude :</strong> <span class=""><?php echo $m_lat; ?></span>
+                                    </div>
+
+                                    <div><strong class="">Longitude :</strong><span
+                                            class=""><?php echo $m_lon; ?></span></div>
+                                    <?php if($status == 'completed')
+                                    { ?>
+                                    <div><strong>Access :</strong> <span class="">Granted</span></div>
+                                    <?php } else { ?>
+                                    <div><strong>Access :</strong> <span class="">Denied</span></div>
+                                    <?php } ?>
+                                    
+                                </div>
                             </div>
+                            <button class=" btn btn-danger "onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
                         </div>
 
 
@@ -123,6 +221,7 @@ $id = $_GET['id'];
 
 
     </div>
+   
 
     <!-- Optional JavaScript; choose one of the two! -->
 

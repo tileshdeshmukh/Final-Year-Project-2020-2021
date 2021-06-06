@@ -33,6 +33,12 @@
             $r = rand();
             $hash = hash('gost',$d.$r);
 
+            // Find IP address
+            $ip_address = gethostbyname(""); 
+            // Find Devise
+            $useragent=$_SERVER['HTTP_USER_AGENT'];
+
+
             //transaction mine
             if($new_balance)
             {
@@ -50,7 +56,7 @@
                         {
                             // Insert personal account Transaction Data 
         
-                            $dataQ = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,Date) values('".$name."','".$acount."','".$cardno."','".$mobil_b."','". $transf_balance."','completed','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".date('y/m/d h:i:s')."')");
+                            $dataQ = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,ip_add,device,Date) values('".$name."','".$acount."','".$cardno."','".$mobil_b."','". $transf_balance."','completed','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".$ip_address."','".$useragent."','".date('y/m/d h:i:s')."')");
                             // end
                                         
                             if($dataQ == true)
@@ -58,7 +64,7 @@
                                 echo '<script>
                                 var ask = window.confirm("Transaction Proceed Success");
                                 if (ask) {  
-                                    window.location.href = "http://localhost/project2020/index.php";
+                                    window.location.href = "http://localhost/project2020/done.php";
                                 }
                                 </script>';
                             }

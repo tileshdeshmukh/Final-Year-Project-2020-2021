@@ -35,8 +35,7 @@
                     <button name="btn" class="btn btn-primary form-control my-3 fs-5" type="submit">My Mobile</button>
                     <div>
                     <div>
-                            <a class="" href="index.php"> Go Back </a>
-                        </div>
+                            <a class="" href="index.php"> Go Back </a> <span class="text-danger"></span>                        </div>
             </form>
            
         </div>

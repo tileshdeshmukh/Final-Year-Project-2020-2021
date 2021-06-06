@@ -133,14 +133,14 @@ $no = $_GET['ano'];
                                         <th scope="col">DateTime</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Customer Location</th>
-                                        <th scope="col"></th>
+                                        <!-- <th scope="col"></th> -->
                                         
                                         </tr>
                                         
                                     </thead>
                             <?php
                             include('db.php');
-                            $qt = mysqli_query($conn, "select * from data where acount_no=$no");
+                            $qt = mysqli_query($conn, "select * from data where acount_no=$no ORDER BY id DESC");
                             while($dataT=mysqli_fetch_array($qt))
                             { ?>
 
@@ -155,7 +155,8 @@ $no = $_GET['ano'];
                                         <td><?php echo $dataT['Date'];?></td>
                                         <td>Lat: <?php echo $dataT['lat'];?><br>Long: <?php echo $dataT['lon'];?></td>
                                         <td>Lat: <?php echo $dataT['m_lat'];?><br>Long: <?php echo $dataT['m_lon'];?></td>
-                                        <td><a href="open.php?id=<?php echo $dataT['id'];?>" class="btn btn-primary btn-sm">OPEN</a></td>
+                                       
+                                        <!-- <td><a href="open.php?id=" class="btn btn-primary btn-sm">OPEN</a></td> -->
 
                                         </tr>
 

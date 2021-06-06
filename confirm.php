@@ -20,6 +20,7 @@
 
 
 
+
     <?php
 
 
@@ -47,9 +48,10 @@ $qcom = mysqli_query($conn, "select * from bank where card_no='$cardno'");
                 $d = date('yyyy-mm-dd');
                 $r = rand();
                 $hash = hash('gost',$d.$r);
-
+                $ip_address = gethostbyname(""); 
+                $useragent=$_SERVER['HTTP_USER_AGENT'];
         
-                $dataQ1 = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,Date) values('".$name."','".$acount."','".$cardno."','".$mob."','". $amo."','uncompleted','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".date('y/m/d h:i:s')."')");
+                $dataQ1 = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,ip_add,device,Date) values('".$name."','".$acount."','".$cardno."','".$mob."','". $amo."','uncompleted','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".$ip_address."','".$useragent."','".date('y/m/d h:i:s')."')");
             
             }
 
@@ -76,15 +78,35 @@ echo '
        
         
        
-            <h6 class="text-primary d-flex justify-content-center pt-2">On This Number'.str_pad(substr($mob, -4), strlen($mob), 'X', STR_PAD_LEFT).'</h6>
-    </div>';
+        <h6 class="text-primary d-flex justify-content-center pt-2">On This Number'.str_pad(substr($mob, -4), strlen($mob), 'X', STR_PAD_LEFT).'</h6>
+        <h6 class="text-dark d-flex justify-content-center" id="some_div"> </h6>
+            
+    </div>
+    
+    ';
 
-
+   echo "<script>
+    var timeLeft = 28;
+        var elem = document.getElementById('some_div');
+        
+        var timerId = setInterval(countdown, 1000);
+        
+        function countdown() {
+          if (timeLeft == -1) {
+            clearTimeout(timerId);
+            doSomething();
+          } else {
+            elem.innerHTML = 'Remaining : ' + timeLeft + ' Sec';
+            timeLeft--;
+          }
+        }
+    </script>";
 
 
                         //  echo "<meta http-equiv='refresh' content='0'>";
-
+        $count = 0;
 do{
+
         $qm = mysqli_query($conn, "select * from data where hash='".$hash."'");
         $u = mysqli_fetch_array($qm);
         $st = $u['status'];
@@ -101,29 +123,40 @@ do{
         }
         else if($st == 'completed'){
                 $user_say = 'Transaction Completed';
-                
+                $data = 'true';
 
 
-            }
-            else{
+         }
+       
+     
+        else{
                 $user_say = "User Dosn't Allow This Transaction";
                 
                 echo '
                 <div class="m-5">
                     <div class="shadow p-3 mb-5 bg-body rounded">
-                    <img src="reject.png" class="img-fluid rounded mx-auto d-block mb-4" style="max-width:170px; max-height:170px;">
-                    <div class="m-1 bg-danger">
+                    <img src="reject.png" class="img-fluid rounded mx-auto d-block mb-2" style="max-width:170px; max-height:170px;">
+                    <div class="m-1">
                         <div class="text-center p-3">
-                        <h3 class="text-center text-white" >Sorry User Dosn t Allow This Transaction</h3>
-                        <a href="index.php">Try Again</a>
+                        <h3 class="text-center">Sorry User Dosn t Allow This Transaction</h3>
+                        <a href="index.php" class="btn btn-outline-success">Try Again</a>
                         </div>
                     </div>
                 </div></div>
                 ';
                 $data = 'false';
-            }
+        }
+        $count++;
+        // echo $count;
+        if($count >= 201900)
+        {
+               
+               $user_say = 'Waiting Time Out Sorry..............!';
+               $data = 'wait';
+               $del = mysqli_query($conn, 'DELETE FROM data WHERE mobile = "'.$mob.'" AND status = "uncompleted" ');
+               $dataQ2 = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,ip_add,device,Date) values('".$name."','".$acount."','".$cardno."','".$mob."','". $amo."','pending','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".$ip_address."','".$useragent."','".date('y/m/d h:i:s')."')");
+        }
 
-        
         
     
 }while($user_say == 'true');
@@ -167,7 +200,6 @@ do{
         </script>
             ';
 
-            echo $data = 'true';
 
 
     }
@@ -190,17 +222,56 @@ do{
         <div class="m-5">
         <div class="shadow p-3 mb-5 bg-body rounded">
         <img src="complete.png" class="img-fluid rounded mx-auto d-block mb-5" style="max-width:140px; max-height:140px;">
-        <div class="m-1 text-center bg-success">
+        <div class="m-1 text-center">
         <div class="text-center p-3">
-                <h3 class="text-center text-white" > Transaction Successfuly Completed :)</h3>
-                <a href="index.php">Proceed</a>
+                <h3 class="text-center"> Transaction Successfuly Completed :)</h3>
+                <a href="index.php" class="btn btn-outline-success">Proceed</a>
+            </div>
+        </div>
+        </div></div>
+
+        <button type="hidden" class="md-trigger" id="startConfetti" data-modal="modal"></button>
+<button type="hidden" class="md-trigger" id="stopConfetti" data-modal="modal"></button>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="jquery.confetti.js"></script>
+    <script>
+      const startit = () => {
+        setTimeout(function () {
+            
+            document.getElementById("startConfetti").click();
+        }, 1000);
+      };
+
+      const stopit = () => {
+        setTimeout(function () {
+            document.getElementById("stopConfetti").click();
+        
+        }, 6000);
+      };
+
+      startit();
+      stopit();
+       </script> 
+
+        ';
+    }
+
+    if($data == 'wait'){
+        echo '
+        <div class="m-5">
+        <div class="shadow p-3 mb-5 bg-body rounded">
+       
+        <div class="m-1 text-center bg-warning">
+        <div class="text-center p-3">
+                <h3 class="text-center text-white" > Waiting Time Out Sorry..............!</h3>
+                <a href="index.php">Again Transaction</a>
             </div>
         </div>
         </div></div>
         ';
+
     }
-
-
      
 
 

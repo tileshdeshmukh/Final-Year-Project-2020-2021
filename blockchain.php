@@ -55,47 +55,51 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Blockchain</a>
+                            <a href="blockchain.php" class="text-decoration-none c_color  text-white">Blockchain</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                                Transactions</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="completed.php" class="text-decoration-none c_color  text-white">Completed
+                                Transactions</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="penting_t.php" class="text-decoration-none c_color  text-white">Pending
+                                Transactions</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+
+                            <a href="atm.php" class="text-decoration-none c_color  text-white">ATM</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="datewise.php" class="text-decoration-none c_color  text-white">Advance</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="#" class="text-decoration-none c_color  text-white">Transaction Graph</a>
                         </li>
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Home</a>
+                            <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
                         </li>
                     </div>
                 </ul>  
