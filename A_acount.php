@@ -16,12 +16,15 @@
 
  
 
-    $b = mysqli_query($conn, "select * from bank where acoun_no = '110000000011' ");
-    $b1 = mysqli_fetch_assoc($b);
-        $admin = $b1['balance'];  
+    // $b = mysqli_query($conn, "select * from bank where acoun_no = '110000000011' ");
+    // $b1 = mysqli_fetch_assoc($b);
+    //     $admin = $b1['balance'];  
 
 
-
+ //Get Admin Balance -----------------------------
+ $b = mysqli_query($conn, "select * from admin");
+ $b1 = mysqli_fetch_assoc($b);
+     $admin = $b1['balance'];
 
 
 
@@ -167,19 +170,25 @@
                         <div class="col">
 
                             <!-- ---------------------------------------------Admin Animation ---------------------------------------------- -->
+                           
                             <div class="row mt-3 text-center">
-                                <div class="col-md-4 p-2">
+                                <div class="col-md-3 p-2">
                                     <p class="text-white h5">Bank Balance : <spam class="text-primary h4">
+                                            Rs.<?php echo 12332 ?>/-</spam?</p>
+                                            <div></div>
+                                </div>
+                                <div class="col-md-3 p-2">
+                                    <p class="text-white h5">Admin Balance : <spam class="text-primary h4">
                                             Rs.<?php echo $admin ?>/-</spam?</p>
                                             <div></div>
                                 </div>
-                                <div class="col-md-4 p-2">
+                                <div class="col-md-3 p-2">
                                     <p class="text-white h5">Deaily Transactions: <spam class="text-primary h4">42.45%
                                             </spam?</p>
                                             <div></div>
                                 </div>
-                                <div class="col-md-4 p-2">
-                                    <p class="text-white h5">Visited: <spam class="text-primary h4">30.06%</spam?< /p>
+                                <div class="col-md-3 p-2">
+                                    <p class="text-white h5">Visited Peoples : <spam class="text-primary h4">30.06%</spam?</p>
                                             <div></div>
                                 </div>
                             </div>

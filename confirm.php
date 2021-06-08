@@ -11,6 +11,8 @@
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <title>Loading....</title>
+
+
 </head>
 
 <body>
@@ -115,9 +117,7 @@ do{
             $user_say = 'true';
             
             echo '
-         
             <input type="hidden" id="custId" name="custId" value="3487">
-          
             ';
 
         }
@@ -130,7 +130,7 @@ do{
        
      
         else{
-                $user_say = "User Dosn't Allow This Transaction";
+                $user_say = "User Not Allow This Transaction";
                 
                 echo '
                 <div class="m-5">
@@ -147,8 +147,8 @@ do{
                 $data = 'false';
         }
         $count++;
-        // echo $count;
-        if($count >= 201900)
+        //  echo $count;
+        if($count >= 172000)
         {
                
                $user_say = 'Waiting Time Out Sorry..............!';
@@ -207,19 +207,32 @@ do{
     {   
         include('db.php');
         $q5 = mysqli_query($conn, "select * from bank where card_no='$cardno'");
+        $admin = mysqli_query($conn, "select * from admin");
+        if($admin == true)
+        {
+            while($admin_data = mysqli_fetch_assoc($admin))
+            {
+                // Increase Admin Balance -----------------
+                $admin_balance = $admin_data['balance'];
+                $new_admin_balance = $admin_balance + $amo;
+            }
+        }
+        
         if($q5 == true)
         {
             while($data = mysqli_fetch_assoc($q5))
             {
-    
+                // Decrement User Balance -----------------------
                  $current_balance = $data['balance'];
+                 $new_balance = $current_balance - $amo;
             }
-        $new_balance = $current_balance - $amo;
+        
+        
         $balance_q = mysqli_query($conn, "update bank set balance = '".$new_balance."' where mobile='".$mobil_b."' ");
+        $balance_admin = mysqli_query($conn, "update admin set balance = '".$new_admin_balance."' where name='Admin' ");
         }
 
-        echo '
-        <div class="m-5">
+        echo ' <div class="m-5">
         <div class="shadow p-3 mb-5 bg-body rounded">
         <img src="complete.png" class="img-fluid rounded mx-auto d-block mb-5" style="max-width:140px; max-height:140px;">
         <div class="m-1 text-center">
@@ -229,35 +242,36 @@ do{
             </div>
         </div>
         </div></div>
-
+       
         <button type="hidden" class="md-trigger" id="startConfetti" data-modal="modal"></button>
-<button type="hidden" class="md-trigger" id="stopConfetti" data-modal="modal"></button>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="jquery.confetti.js"></script>
-    <script>
-      const startit = () => {
+        <button type="hidden" class="md-trigger" id="stopConfetti" data-modal="modal"></button>
+       
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="jquery.confetti.js"></script>
+        <script>
+        const startit = () => {
         setTimeout(function () {
             
             document.getElementById("startConfetti").click();
         }, 1000);
-      };
-
-      const stopit = () => {
+       };
+       
+       const stopit = () => {
         setTimeout(function () {
             document.getElementById("stopConfetti").click();
         
         }, 6000);
-      };
-
-      startit();
-      stopit();
+       };
+       
+       startit();
+       stopit();
        </script> 
-
+       
         ';
+       
     }
 
-    if($data == 'wait'){
+     if($data == 'wait'){
         echo '
         <div class="m-5">
         <div class="shadow p-3 mb-5 bg-body rounded">
@@ -265,13 +279,14 @@ do{
         <div class="m-1 text-center bg-warning">
         <div class="text-center p-3">
                 <h3 class="text-center text-white" > Waiting Time Out Sorry..............!</h3>
-                <a href="index.php">Again Transaction</a>
+                <a href="index.php" class="btn btn-outline-primary">Again Transaction</a>
             </div>
         </div>
         </div></div>
         ';
 
     }
+    
      
 
 
