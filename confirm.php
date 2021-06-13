@@ -1,3 +1,20 @@
+<!-- --------------------------------------------------------------------------- Find Device -->
+<script type="text/javascript">
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+var element = document.getElementById('text');
+if (isMobile) {
+    <?php
+                $useragent = "Mobile";
+            ?>
+
+} else {
+    <?php
+            $useragent = "Desktop";
+            ?>
+
+}
+</script>
+
 <!doctype html>
 <html lang="en">
 
@@ -27,7 +44,7 @@
 
 
 
-// Data Converted into plane data --------------------------------
+//  ------------------------------------------------------------- Data Converted into plane data
 
 $cardno = base64_decode($_GET['cno']);
 $amo = base64_decode($_GET['amo']);
@@ -51,8 +68,8 @@ $qcom = mysqli_query($conn, "select * from bank where card_no='$cardno'");
                 $r = rand();
                 $hash = hash('gost',$d.$r);
                 $ip_address = gethostbyname(""); 
-                $useragent=$_SERVER['HTTP_USER_AGENT'];
-        
+                // $useragent=$_SERVER['HTTP_USER_AGENT'];
+                
                 $dataQ1 = mysqli_query($conn, "insert into data(name,acount_no,card_no,mobile,amount,status,hash,lat,lon,m_lat,m_lon,ip_add,device,Date) values('".$name."','".$acount."','".$cardno."','".$mob."','". $amo."','uncompleted','".$hash."','".$latitude."','".$longitude."','".$m_lat."','".$m_long."','".$ip_address."','".$useragent."','".date('y/m/d h:i:s')."')");
             
             }
@@ -65,6 +82,8 @@ $qcom = mysqli_query($conn, "select * from bank where card_no='$cardno'");
 
 
         // $last_mob =  str_pad(substr($mob, -4), strlen($mob), 'X', STR_PAD_LEFT);
+
+// ----------------------------------------------------------------------- Loading amd Waiting 
 echo '
     <div class="container mt-5">
         <div class="d-flex justify-content-center pt-5">
@@ -76,7 +95,7 @@ echo '
 
         </div> 
        
-       <h3 class="d-flex justify-content-center pt-3">Please Wait for allowe to Trasanction......</h3>
+       <h3 class="d-flex justify-content-center pt-3">Please Wait for allow to Transaction......</h3>
        
         
        
@@ -86,6 +105,9 @@ echo '
     </div>
     
     ';
+
+
+// -------------------------------------------------------------------Timer 30 sec
 
    echo "<script>
     var timeLeft = 28;
@@ -106,6 +128,8 @@ echo '
 
 
                         //  echo "<meta http-equiv='refresh' content='0'>";
+
+    // ------------------------------------------------------- Waiting State Animation Condition 
         $count = 0;
 do{
 
@@ -138,7 +162,7 @@ do{
                     <img src="reject.png" class="img-fluid rounded mx-auto d-block mb-2" style="max-width:170px; max-height:170px;">
                     <div class="m-1">
                         <div class="text-center p-3">
-                        <h3 class="text-center">Sorry User Dosn t Allow This Transaction</h3>
+                        <h3 class="text-center">Sorry User Not Allow This Transaction</h3>
                         <a href="index.php" class="btn btn-outline-success">Try Again</a>
                         </div>
                     </div>
@@ -147,8 +171,8 @@ do{
                 $data = 'false';
         }
         $count++;
-        //  echo $count;
-        if($count >= 172000)
+ //  ----------------------------------------------------------------- Occer Time Out Condition
+        if($count >= 59000)
         {
                
                $user_say = 'Waiting Time Out Sorry..............!';
@@ -163,7 +187,7 @@ do{
 
 ?>
 
-
+<!-- ------------------------------------------------------------- Completed Transaction -->
     <?php 
     
     if($user_say == 'Transaction Completed'){
@@ -184,7 +208,7 @@ do{
 
             
            
-
+// ----------------------------------------------------------- Block mining
 
             echo '
             <script>
@@ -202,6 +226,13 @@ do{
 
 
 
+
+            
+
+            
+
+
+// ------------------------------------------------------------------ Cut Balance and Admin balance
     }
     if($data == 'true')
     {   
@@ -232,12 +263,13 @@ do{
         $balance_admin = mysqli_query($conn, "update admin set balance = '".$new_admin_balance."' where name='Admin' ");
         }
 
+// ------------------------------------------------------------- Show Transaction Completed UI 
         echo ' <div class="m-5">
         <div class="shadow p-3 mb-5 bg-body rounded">
         <img src="complete.png" class="img-fluid rounded mx-auto d-block mb-5" style="max-width:140px; max-height:140px;">
         <div class="m-1 text-center">
         <div class="text-center p-3">
-                <h3 class="text-center"> Transaction Successfuly Completed :)</h3>
+                <h3 class="text-center"> Transaction Successfully Completed :)</h3>
                 <a href="index.php" class="btn btn-outline-success">Proceed</a>
             </div>
         </div>
@@ -260,7 +292,7 @@ do{
         setTimeout(function () {
             document.getElementById("stopConfetti").click();
         
-        }, 6000);
+        }, 4000);
        };
        
        startit();
@@ -278,7 +310,7 @@ do{
        
         <div class="m-1 text-center bg-warning">
         <div class="text-center p-3">
-                <h3 class="text-center text-white" > Waiting Time Out Sorry..............!</h3>
+                <h3 class="text-center text-white">Time Out Sorry..............!</h3>
                 <a href="index.php" class="btn btn-outline-primary">Again Transaction</a>
             </div>
         </div>

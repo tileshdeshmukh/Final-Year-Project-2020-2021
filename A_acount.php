@@ -78,10 +78,7 @@
                 <div class="sidebar-header text-center pt-3">
                     <h3 class="text-primary"> Admin</h3>
                 </div>
-
-                <ul class="list-unstyled components">
-                    <p class="text-white">Testing Bank Pvt Lmt</p>
-                    <div class="p-2">
+                <div class="p-2">
                         <li class="c_border p-1 ">
                             <a href="admin.php" class="text-decoration-none c_color  text-white">Home</a>
                         </li>
@@ -93,7 +90,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Fraud
                                 Transactions</a>
                         </li>
                     </div>
@@ -105,19 +102,14 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="penting_t.php" class="text-decoration-none c_color  text-white">Pending
+                            <a href="penting_t.php" class="text-decoration-none c_color  text-white">Reject
                                 Transactions</a>
                         </li>
                     </div>
+                 
                     <div class="p-2">
                         <li class="c_border p-1 ">
-
-                            <a href="atm.php" class="text-decoration-none c_color  text-white">ATM</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Accounts Detail</a>
                         </li>
                     </div>
                     <div class="p-2">
@@ -125,16 +117,8 @@
                             <a href="datewise.php" class="text-decoration-none c_color  text-white">Advance</a>
                         </li>
                     </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Transaction Graph</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
-                        </li>
-                    </div>
+                    
+
                 </ul>
 
             </div>
@@ -183,7 +167,7 @@
                                             <div></div>
                                 </div>
                                 <div class="col-md-3 p-2">
-                                    <p class="text-white h5">Deaily Transactions: <spam class="text-primary h4">42.45%
+                                    <p class="text-white h5">Daily Transactions: <spam class="text-primary h4">42.45%
                                             </spam?</p>
                                             <div></div>
                                 </div>
@@ -233,7 +217,7 @@
                                             <td><?php echo $dataT['addres'];?></td>
                                             <td><?php echo $dataT['card_no'];?></td>
                                             <td>Rs.<?php echo $dataT['balance'];?>/-</td>
-                                            <td><a href="" class="btn btn-primary btn-sm">Action</a></td>
+                                            <td><a href="" class="btn btn-primary btn-sm">Edit</a></td>
 
                                         </tr>
 

@@ -91,7 +91,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Reject
                                 Transactions</a>
                         </li>
                     </div>
@@ -107,15 +107,10 @@
                                 Transactions</a>
                         </li>
                     </div>
+                  
                     <div class="p-2">
                         <li class="c_border p-1 ">
-
-                            <a href="atm.php" class="text-decoration-none c_color  text-white">ATM</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Accounts Detail</a>
                         </li>
                     </div>
                     <div class="p-2">
@@ -123,16 +118,8 @@
                             <a href="datewise.php" class="text-decoration-none c_color  text-white">Advance</a>
                         </li>
                     </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Transaction Graph</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
-                        </li>
-                    </div>
+                   
+
                 </ul>
 
             </div>
@@ -181,7 +168,7 @@
                                             <div></div>
                                 </div>
                                 <div class="col-md-3 p-2">
-                                    <p class="text-white h5">Deaily Transactions: <spam class="text-primary h4">42.45%
+                                    <p class="text-white h5">Daily Transactions: <spam class="text-primary h4">42.45%
                                             </spam?</p>
                                             <div></div>
                                 </div>
@@ -193,7 +180,7 @@
 
 
                             <hr class="text-danger">
-                            <h4 class="text-white text-center">Froud Transactions </h4>
+                            <h4 class="text-white text-center">Fraud Transactions </h4>
                             <hr class="text-danger">
 
                             <div class="d-flex justify-content-center mx-2 mt-2 ">
@@ -202,11 +189,11 @@
                                     <thead>
 
                                         <tr>
-                                            <th scope="col">#</th>
-
+                                            
+                                        <th scope="col">Name</th>
                                             <th scope="col">Card No</th>
                                             <th scope="col">Rs.</th>
-                                            <th scope="col">Status</th>
+                                           
                                             <th scope="col">DateTime</th>
                                             <th scope="col">Location</th>
                                             <th scope="col">Customer Location</th>
@@ -224,11 +211,11 @@
                                     <tbody>
 
                                         <tr>
-                                            <th scope="row"><?php echo $dataT['id'];?></th>
+                                            <th scope="row"><?php echo $dataT['name'];?></th>
 
                                             <td><?php echo $dataT['card_no'];?></td>
                                             <td><?php echo $dataT['amount'];?></td>
-                                            <td><?php echo $dataT['status'];?></td>
+                                           
                                             <td><?php echo $dataT['Date'];?></td>
                                             <td>Lat: <?php echo $dataT['lat'];?><br>Long: <?php echo $dataT['lon'];?>
                                             </td>

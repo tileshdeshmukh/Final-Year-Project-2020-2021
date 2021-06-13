@@ -94,7 +94,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Reject
                                 Transactions</a>
                         </li>
                     </div>
@@ -110,32 +110,19 @@
                                 Transactions</a>
                         </li>
                     </div>
+                   
                     <div class="p-2">
                         <li class="c_border p-1 ">
-
-                            <a href="atm.php" class="text-decoration-none c_color  text-white">ATM</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Accounts Detail</a>
                         </li>
                     </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="datewise.php" class="text-decoration-none c_color  text-white">Advance</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Transaction Graph</a>
-                        </li>
-                    </div>
+                    
                     <div class="p-2">
                         <li class="c_border p-1 ">
                             <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
                         </li>
                     </div>
+
                 </ul>
 
             </div>
@@ -183,7 +170,7 @@
                                             <div></div>
                                 </div>
                                 <div class="col-md-3 p-2">
-                                    <p class="text-white h5">Deaily Transactions: <spam class="text-primary h4">42.45%
+                                    <p class="text-white h5">Daily Transactions: <spam class="text-primary h4">42.45%
                                             </spam?</p>
                                             <div></div>
                                 </div>

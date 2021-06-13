@@ -1,3 +1,21 @@
+<script type="text/javascript">
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+		var element = document.getElementById('text');
+		if (isMobile) {
+            <?php
+                $useragent = "Mobile";
+            ?>
+  			
+		} else {
+            <?php
+            $useragent = "Desktop";
+            ?>  
+			
+		}
+
+
+
+    </script>
 <?php
     include('db.php');
     $cno = base64_decode($_GET['cno']);
@@ -36,7 +54,7 @@
             // Find IP address
             $ip_address = gethostbyname(""); 
             // Find Devise
-            $useragent=$_SERVER['HTTP_USER_AGENT'];
+            // $useragent=$_SERVER['HTTP_USER_AGENT'];
 
 
             //transaction mine

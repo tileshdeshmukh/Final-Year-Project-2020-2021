@@ -90,7 +90,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Fraud
                                 Transactions</a>
                         </li>
                     </div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Accounts Detail</a>
                         </li>
                     </div>
                     <div class="p-2">
@@ -132,6 +132,7 @@
                             <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
                         </li>
                     </div>
+    
                 </ul>
 
             </div>
@@ -180,7 +181,7 @@
                                             <div></div>
                                 </div>
                                 <div class="col-md-3 p-2">
-                                    <p class="text-white h5">Deaily Transactions: <spam class="text-primary h4">42.45%
+                                    <p class="text-white h5">Daily Transactions: <spam class="text-primary h4">42.45%
                                             </spam?</p>
                                             <div></div>
                                 </div>
@@ -201,7 +202,7 @@
                                     <thead>
 
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
 
                                             <th scope="col">Card No</th>
                                             <th scope="col">Rs.</th>
@@ -223,7 +224,7 @@
                                     <tbody>
 
                                         <tr>
-                                            <th scope="row"><?php echo $dataT['id'];?></th>
+                                            <th scope="row"><?php echo $dataT['name'];?></th>
 
                                             <td><?php echo $dataT['card_no'];?></td>
                                             <td><?php echo $dataT['amount'];?></td>

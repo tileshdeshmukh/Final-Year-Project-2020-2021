@@ -42,7 +42,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-">
                 <div class="container-fluid">
-                <h3 class="text-dark">Bank Acount Login</h3>
+                <h3 class="text-dark">Bank Account Login</h3>
                 </div>
                     
                 
@@ -62,8 +62,8 @@
                              <form method="POST" action="login.php">
                              <div class="form-group">
                            
-                            <label for="" class="my-2">Acount Number:</label>
-                            <input type="number" name="ano" size="16" maxlength="16 " autocomplete="off" target="_blank" class="form-control btn btn-outline-light btn-lg" placeholder="Acount Nomber" required />
+                            <label for="" class="my-2">Account Number:</label>
+                            <input type="number" name="ano" size="16" maxlength="16 " autocomplete="off" target="_blank" class="form-control btn btn-outline-light btn-lg" placeholder="Account Nomber" required />
 
                            </div>                  
 
@@ -79,11 +79,11 @@
                                 LOGIN</button>
                             </div> 
                             <div class="form-group mt-3">
-                                <h6>Forgate Password <a href="#">Click Here</a></h6>
+                                <h6>Forgot Password <a href="#">Click Here</a></h6>
                             </div>
 
                             <div class="form-group mt-3">
-                                <h6>New User <a href="#">Open Acount</a></h6>
+                                <h6>New User <a href="#">Open Account</a></h6>
                             </div>
                         </form>
                     </div>

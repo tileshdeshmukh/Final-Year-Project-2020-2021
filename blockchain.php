@@ -1,3 +1,68 @@
+<?php
+include('db.php');
+    // $delet = mysqli_query($conn, "DELETE FROM chain");  
+
+     
+
+        $response = file_get_contents('http://127.0.0.1:3000/blockchain');                                    
+    
+        $blocks = json_decode($response, true);
+
+        $chains = count($blocks["chain"]);
+        
+      
+        for($i=0;$i<$chains;$i++)
+        {
+            $index = $blocks["chain"][$i]['index'];
+            if($index == 1){
+                continue;
+            }
+            else
+            {
+                    
+                $timestamp = $blocks['chain'][$i]['timestamp'];   
+                $tran = count($blocks['chain'][$i]['transactions']);
+               
+                for($t=0; $t<$tran;$t++)
+                {
+                    if($tran == 1)
+                    {
+                        
+                        $amount = $blocks['chain'][$i]['transactions'][0]['amount'];
+                        $sender = $blocks['chain'][$i]['transactions'][0]['sender'];
+                        $recipient = $blocks['chain'][$i]['transactions'][0]['recipient'];
+                            
+                    }
+                    else
+                    {
+                        $amount = $blocks['chain'][$i]['transactions'][$t]['amount'];
+                        $sender = $blocks['chain'][$i]['transactions'][$t]['sender'];
+                        $recipient = $blocks['chain'][$i]['transactions'][$t]['recipient'];
+                            
+                    } 
+                }
+                $nonce = $blocks['chain'][$i]['nonce'];
+                $hash = $blocks['chain'][$i]['hash'];
+                $previousHash = $blocks['chain'][$i]['prevBlockHash'];
+                
+                $q = mysqli_query($conn, "SELECT * FROM chain");
+                while($row = mysqli_fetch_array($q))
+                {
+                    if($hash == $row['hash'])
+                    {
+                        $sql = mysqli_query($conn, "insert into chain(index_no, timestamp, amount, sender, reciver, nonce, hash, pre_hash) 
+                        values('".$index."', '".$timestamp."', '".$amount."', '".$sender."', '".$recipient."', '".$nonce."', '".$hash."', '".$previousHash."')");
+                    }
+                    
+                    
+                }
+            }
+        }
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -60,7 +125,12 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                            <a href="test.php" class="text-decoration-none c_color  text-white">Blocks Reconstruction </a>
+                        </li>
+                    </div>
+                    <div class="p-2">
+                        <li class="c_border p-1 ">
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Reject
                                 Transactions</a>
                         </li>
                     </div>
@@ -76,33 +146,14 @@
                                 Transactions</a>
                         </li>
                     </div>
+        
                     <div class="p-2">
                         <li class="c_border p-1 ">
-
-                            <a href="atm.php" class="text-decoration-none c_color  text-white">ATM</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Accounts Detail</a>
                         </li>
                     </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="datewise.php" class="text-decoration-none c_color  text-white">Advance</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Transaction Graph</a>
-                        </li>
-                    </div>
-                    <div class="p-2">
-                        <li class="c_border p-1 ">
-                            <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
-                        </li>
-                    </div>
-                </ul>  
+                    
+                </ul>
 
             </div>
 
@@ -130,14 +181,14 @@
                             <button class="btn btn-outline-primary" type="submit">Search</button>
                         </form>
                     </div>
-                
+
                 </nav>
                 <div class="mt-2 c_color c_border">
-                <div class="row mx-1">
-                    <div class="col">
+                    <div class="row mx-1">
+                        <div class="col">
 
-                        <!-- ---------------------------------------------Blockchain---------------------------------------------- -->
-                        <?php
+                            <!-- ---------------------------------------------Blockchain---------------------------------------------- -->
+                            <?php
                             $response = file_get_contents('http://127.0.0.1:3000/blockchain');
                                             
                             $blocks = json_decode($response);
@@ -148,91 +199,156 @@
                         ?>
 
 
-                        <h2 class="c_menu">Blockchain</h2>
-                        <h5 class="text-primary"> Pending Transactions : <button type="button" class="btn  c_menu c_border" style="background-color: #4a4948;" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                <?php echo $pending ?>
-                            </button></a></h5>
-                        <hr class="text-primary">
-                        <div class="row">
-                            <?php               
-                    for($i=1; $i<$chains; $i++){
-                        
-             ?>
-                            <div class="col-lg-4 col-lg-4 col-sm-10 pt-2">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="card-body" style="background-color: #4a4948;">
-                                        <h5 class="card-title c_menu">Block : <samp
-                                                class="text-primary text-lg"><?php echo $blocks->chain[$i]->index ?></samp>
-                                        </h5>
-                                        <h6 class="card-subtitle mb-2 c_menu">Timestamp : <span
-                                                class="text-primary"><?php echo $blocks->chain[$i]->timestamp ?></span>
-                                        </h6>
-                                        <hr class="text-white">
-                                        <p class="card-text c_menu">PreviuosHash: <span
-                                                class="text-danger"><?php echo $blocks->chain[$i]->prevBlockHash ?></p>
-                                        <?php
-                            if($i == 0)
-                            { 
-                            ?>
-                                        <td scope="row"><?php echo '--' ?></td>
-                                        <td scope="row"><?php echo '--' ?></td>
-                                        <?php
-                            }
-                            else
-                            {
-                            
-                            $tran = count($blocks->chain[$i]->transactions);
-                            for($t=0; $t<$tran;$t++)
-                            {
-                                if($tran == 1)
-                                {
-                                ?>
-                                        <p class="c_menu">Amount : <span
-                                                class="text-primary"><?php echo $blocks->chain[$i]->transactions[0]->amount ?>
-                                            </span></p>
-                                        <p class="c_menu">Sender : <span
-                                                class="text-primary"><?php echo $blocks->chain[$i]->transactions[0]->sender ?>
-                                            </span></p>
+                            <h2 class="c_menu">Blockchain</h2>
+                            <h5 class="text-primary"> Pending Transactions : <button type="button"
+                                    class="btn  c_menu c_border" style="background-color: #4a4948;"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <?php echo $pending ?>
+                                </button></a></h5>
+                            <hr class="text-primary">
+                            <div class="row">
+                                <?php    
 
-                                        <?php 
-                                
-                                }
-                                else{ ?>
+    // ------------------------------------------------------------ --------------- Check Missing block
 
-                                        <p class="c_menu">Amount : <span
-                                                class="text-primary"><?php echo $blocks->chain[$i]->transactions[$t]->amount ?>
-                                            </span></p>
-                                        <p class="c_menu">Sender : <span
-                                                class="text-primary"><?php echo $blocks->chain[$i]->transactions[$t]->sender ?>
-                                            </span></p>
+                             include('db.php');
+                             $sql = mysqli_query($conn, "select * from chain");
+                             $pre = '';
+                             while ($row = mysqli_fetch_array($sql))
+                             {           
+                    
+                                if($row['pre_hash'] == 'Genesis block')
+	                                {
+		
+		                                $pre = $row['hash'];
+                                 ?>
+                                <div class="col-lg-4 col-lg-4 col-sm-10 pt-2">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body" style="background-color: #4a4948;">
+                                            <h5 class="card-title c_menu">Block : <samp
+                                                    class="text-primary text-lg"><?php echo $row['index_no']; ?></samp>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 c_menu">Timestamp : <span
+                                                    class="text-primary"><?php echo $row['timestamp']; ?></span>
+                                            </h6>
+                                            <hr class="text-white">
+                                            <p class="card-text c_menu">PreviuosHash: <span
+                                                    class="text-info"><?php echo $row['pre_hash']; ?></p>
 
-                                        <?php
-                                }
-                            }
-                                
-                                ?>
 
-                                        <?php } ?>
-                                        <hr class="c_menu">
-                                        <p class="c_menu">Hash : </p>
-                                        <spam class="text-success"><?php echo $blocks->chain[$i]->hash ?></spam>
+                                            <p class="c_menu">Amount : <span
+                                                    class="text-primary"><?php echo $row['amount']; ?>
+                                                </span></p>
+                                            <p class="c_menu">Sender : <span
+                                                    class="text-primary"><?php echo $row['sender']; ?>
+                                                </span></p>
+                                            <p class="c_menu">Receiver : <span
+                                                    class="text-primary"><?php echo $row['reciver']; ?>
+                                                </span></p>
+                                            <hr class="c_menu">
+                                            <p class="c_menu">Hash : </p>
+                                            <spam class="text-warning"><?php echo $row['hash']; ?></spam>
 
 
 
+                                        </div>
                                     </div>
+
+                                </div>
+                                <?php
+                                }
+                                else{ 
+		                         if($row['pre_hash'] == $pre)
+		                        {
+                                    ?>
+                                <div class="col-lg-4 col-lg-4 col-sm-10 pt-2">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body" style="background-color: #4a4948;">
+                                            <h5 class="card-title c_menu">Block : <samp
+                                                    class="text-primary text-lg"><?php echo $row['index_no']; ?></samp>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 c_menu">Timestamp : <span
+                                                    class="text-primary"><?php echo $row['timestamp']; ?></span>
+                                            </h6>
+                                            <hr class="text-white">
+                                            <p class="card-text c_menu">PreviuosHash: <span
+                                                    class="text-info"><?php echo $row['pre_hash']; ?></p>
+
+
+                                            <p class="c_menu">Amount : <span
+                                                    class="text-primary"><?php echo $row['amount']; ?>
+                                                </span></p>
+                                            <p class="c_menu">Sender : <span
+                                                    class="text-primary"><?php echo $row['sender']; ?>
+                                                </span></p>
+                                            <p class="c_menu">Receiver : <span
+                                                    class="text-primary"><?php echo $row['reciver']; ?>
+                                                </span></p>
+
+                                            <hr class="c_menu">
+                                            <p class="c_menu">Hash : </p>
+                                            <spam class="text-warning"><?php echo $row['hash']; ?></spam>
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <?php
+                                }
+                                else{
+                                    ?>
+                                
+                                <div class="col-lg-4 col-lg-4 col-sm-10 pt-2">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body" style="background-color: #e60909;">
+                                            <h5 class="card-title c_menu">Block : <samp
+                                                    class="text-primary text-lg"><?php echo $row['index_no']; ?></samp>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 c_menu">Timestamp : <span
+                                                    class="text-primary"><?php echo $row['timestamp']; ?></span>
+                                            </h6>
+                                            <hr class="text-white">
+                                            <p class="card-text c_menu">PreviuosHash: <span
+                                                    class="text-info"><?php echo $row['pre_hash']; ?></p>
+
+
+                                            <p class="c_menu">Amount : <span
+                                                    class="text-primary"><?php echo $row['amount']; ?>
+                                                </span></p>
+                                            <p class="c_menu">Sender : <span
+                                                    class="text-primary"><?php echo $row['sender']; ?>
+                                                </span></p>
+                                            <p class="c_menu">Receiver : <span
+                                                    class="text-primary"><?php echo $row['reciver']; ?>
+                                                </span></p>
+
+                                            <hr class="c_menu">
+                                            <p class="c_menu">Hash : </p>
+                                            <spam class="text-warning"><?php echo $row['hash']; ?></spam>
+
+
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                            </div>
-                            <?php
+
+                                <?php
+                                }
+                            }
+                            $pre = $row['hash'];
+                            
                     }
                     ?>
+                            </div>
+
+
                         </div>
 
-
                     </div>
-
-                </div>
 
 
 
@@ -330,3 +446,4 @@
 </body>
 
 </html>
+x

@@ -46,7 +46,7 @@
         setTimeout(function () {
             document.getElementById("stopConfetti").click();
         //   print('<div id="stopConfetti"></div>');
-        }, 6000);
+        }, 3000);
       };
 
       startit();

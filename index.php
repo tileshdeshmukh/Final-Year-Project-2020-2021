@@ -67,7 +67,7 @@
 
                         <div>
                             <a class="" href="admin.php"> Admin </a> &nbsp <a class="" href="login.php">User
-                                Acount</a>&nbsp <a class="" href="mob_log.php">My Device</a> &nbsp <a class=""
+                                Account</a>&nbsp <a class="" href="mob_log.php">My Device</a> &nbsp <a class=""
                                 href="blockchain.php">Blockchain</a>
                         </div>
 

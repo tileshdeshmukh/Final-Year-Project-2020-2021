@@ -60,7 +60,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Froud
+                            <a href="froud_t.php" class="text-decoration-none c_color  text-white">Fraud
                                 Transactions</a>
                         </li>
                     </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="p-2">
                         <li class="c_border p-1 ">
-                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Acounts Detaile</a>
+                            <a href="A_acount.php" class="text-decoration-none c_color  text-white">Accounts Detail</a>
                         </li>
                     </div>
                     <div class="p-2">
@@ -102,6 +102,7 @@
                             <a href="#" class="text-decoration-none c_color  text-white">Feedbacks</a>
                         </li>
                     </div>
+
                 </ul>
 
             </div>
@@ -147,11 +148,11 @@
                                     </div>
 
                                     <div class="col">
-                                        <label class="lable-control text-white">From</label>
+                                        <label class="lable-control text-white">To</label>
                                         <input type="date" class="form-control w-75" placeholder="" name="end">
                                     </div>
                                     <div class="col">
-                                        <label type="hidden" class="">dsd</label>
+                                        <label type="hidden" class="">dsd</label>   
                                         <div class="col"><button class="btn btn-info" type="submit"
                                                 name="date">Search</button> </div>
                                     </div>

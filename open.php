@@ -97,7 +97,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
                     <p class="navbar-brand mx-3 text-primary">Account Holder <spam class="text-dark">
                             <?php echo $name; ?> </spam>
 
-                          
+
                 </div>
             </nav>
         </div>
@@ -129,54 +129,86 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
                     <!-- Customer Details -->
                     <h3 class="mx-5">Transactions Details :</h3>
                     <hr>
-                    <div class="m-4">
+                    <div class="m-2">
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div><strong>Latitude</strong> </div>
-                                        <div><strong>Longitude</strong> </div>
-                                        <div><strong>Device</strong> </div>
-                                        <div><strong>&nbsp;</strong> </div>
-                                        <div><strong>&nbsp;</strong> </div>
-                                        <div><strong>&nbsp;</strong> </div>
-                                        <div><strong>IP Address</strong> </div>
-                                        <div><strong>Amount</strong> </div>
-                                        <div><strong>Status</strong> </div>
-                                        <div><strong>Date</strong> </div>
-                                        <div><strong>Transaction ID</strong> </div>
-                                        <div><strong>&nbsp;</strong> </div>
-                                        <div><strong>Distance</strong> </div>
-                                    </div>
-                                    <!-- <div class="col-md-4">
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                        <div><strong> : </strong></div>
-                                    </div> -->
-                                    <div class="col-md-8">
-                                        <div><strong> : </strong> <span class=""><?php echo $lat; ?></span></div>
-                                        <div><strong> : </strong> <span class=""><?php echo $lon; ?></span></div>
-                                        <div><strong> : </strong> <span class="scroll"><?php echo $device ; ?></span></div>
-                                        <div><strong> : </strong> <span class=""><?php echo $ip; ?></span></div>
-                                        <div><strong> : </strong> <span class=""><?php echo $amount; ?></span></div>
-                                        <div><strong> : </strong> <span class=""><?php echo $status; ?></span></div>
-                                        <div><strong> : </strong> <span class=""><?php echo $date; ?></span></div>
-                                        <div> <b>:</b><span class=""><?php echo $hash; ?></span></div>
-                                        <div> <b> : </b><span class=""><?php echo distance($m_lat, $m_lon, $lat, $lon, "K"); ?> <b>km</b></span></div>
-                                    </div>
-                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="col"><strong>Latitude</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $lat; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Longitude</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $lon; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Device</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $device; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>IP Address</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $ip; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Amount</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $amount; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Status</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $status; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Date</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $date; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Transaction ID</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo $hash; ?></td>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col"><strong>Distance</strong></td>
+                                            <td>:</td>
+                                            <td><?php echo distance($m_lat, $m_lon, $lat, $lon, "K"); ?> <b>km</b></td>
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+
                             </div>
-                            <div class="text-center col-md-6 imgcont">
+                            <div class="text-center col-md-6 imgcont ">
                                 <img src="mobile1.png" class="img-fluid" alt="..." style="max-width: 250px;">
                                 <div class="top-right"><strong class="px-4"><?php echo $date; ?></strong></div>
-                                <div class="top-left p-2 bg-info" style="">
+                                <div class="top-left p-2 bg-info" style="margin-left:10px; margin-top:10px;">
                                     <div><strong>Latitude :</strong> <span class=""><?php echo $m_lat; ?></span>
                                     </div>
 
@@ -188,16 +220,16 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
                                     <?php } else { ?>
                                     <div><strong>Access :</strong> <span class="">Denied</span></div>
                                     <?php } ?>
-                                    
+
                                 </div>
                             </div>
-                            <button class=" btn btn-danger "onclick="goBack()">Go Back</button>
+                            <button class=" btn btn-danger " onclick="goBack()">Go Back</button>
 
-<script>
-function goBack() {
-  window.history.back();
-}
-</script>
+                            <script>
+                            function goBack() {
+                                window.history.back();
+                            }
+                            </script>
                         </div>
 
 
@@ -221,7 +253,7 @@ function goBack() {
 
 
     </div>
-   
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

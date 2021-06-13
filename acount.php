@@ -119,14 +119,14 @@ $no = $_GET['ano'];
             <div class="card shadow pt-3 mt-4 bg-white rounded col-lg-9 col-md-9 col-sm-12">
                 <div class="">
                     <!-- Customer Details -->
-                    <h3 class="mx-5">Acount Details :</h3>
+                    <h3 class="mx-5">Account Details :</h3>
                     <hr>
                     <div class="row mx-5">
                         <div class="col-5">
                             <p class="">
                             <h5>Name :</h5> <?php echo $name; ?> </p>
                             <p class="">
-                            <h5>Acount NO :</h5> <?php echo $anumber; ?> </p>
+                            <h5>Account NO :</h5> <?php echo $anumber; ?> </p>
                             <p class="">
                             <h5>Address :</h5> <?php echo $addres; ?> </p>
                             <p class="">

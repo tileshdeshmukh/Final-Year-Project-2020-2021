@@ -184,7 +184,7 @@
 
             var w = 0;
             var allowe = window.confirm(
-                "location does not match Please Wait for allowe to Trasanction...");
+                "location does not match Please Wait for allow to Trasanction...");
            
            
            
