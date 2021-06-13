@@ -1,93 +1,63 @@
-const express = require("express");
-const SHA256 = require("crypto-js/sha256");
-const cors = require('cors')
+const express = require('express');
 const app = express();
-app.use(cors())
-let ind = 0;
-var k = 0;
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
-app.get("/api/:amount/:no", (req, res) => {
+const nodeAddr = 'JavaSampleApproach';
 
-  let a = req.params.amount;
-  let n = req.params.no;
-  if(a == 0 && n == 0)
-  {
-      return res.json(chains);
-  }
-  else{
+const Blockchain = require('../src/blockchain');
 
-  class Block {
-    constructor(index, timestamp, data, previousHash = "") {
-      this.index = index;
-      this.timestamp = timestamp;
-      this.data = data;
-      this.previousHash = previousHash;
-      this.hash = this.calculateHash();
-      this.nonce = 0; //Proof Of Work
-      
-    }
-    calculateHash() {
-      return SHA256(
-        this.index +
-          this.previousHash +
-          this.timestamp +
-          JSON.stringify(this.data)
-      ).toString();
-    }
-  }
-  class Blockchain {
+const bitcoin = new Blockchain();
+
+
+
+
+app.get('/blockchain', function (req, res) {
     
-    constructor() {
-      
-      this.chain = [this.createGenesisBlock()];
-      // this.difficulty = 2; ////Proof Of Work
-       
-    }
-    
-    createGenesisBlock() {     
-      return new Block(ind++, "01/01/2020", "Genesisblock", "0");
-    }
-
-    getLasteBlock() {
-      return this.chain[this.chain.length - 1];
-    }
-    addBlock(newBlock) {
-      newBlock.previousHash = this.getLasteBlock().hash;
-      ////Proof Of Work
-      //newBlock.mineBlock(this.difficulty);
-      newBlock.hash = newBlock.calculateHash();
-      this.chain.push(newBlock);
-    }
-  }
-
-    var b = new Blockchain();  
-
-  // let b = new Blockchain();
-
-  
- 
+    res.send(bitcoin);
+    // res.json(bitcoin);
    
-  //console.log("Mining Block 1...");
-  b.addBlock(new Block(ind++, "01/02/2021", { amount: req.params.amount, Acount_No: req.params.no }));
-  // b.addBlock(new Block(ind++, "01/02/2021", { amount: 4}));
-  // b.addBlock(new Block(ind++, "01/02/2021", { amount: 5}));
-  // b.addBlock(new Block(ind++, "01/02/2021", { amount: 5}));
-  // console.log("Mining Block 2...");
-  
-  
+});
+// req.body.amount,
+// req.body.sender,
+// req.body.recipient 
+app.get('/transaction/:amount/:sender/:recipient', function (req, res) {
+    const blockIndex = bitcoin.makeNewTransaction(
+        req.params.amount,
+        req.params.sender,
+        req.params.recipient
+    );
 
-  var data = b
-  chains = {chain:[...chains.chain,...data.chain]}
-  
-  
-  
-     
-    res.json(chains);
-}
-  //res.send('Blockchain');
-  
+    res.json(
+        {
+            message: `Transaction is added to block with index: ${blockIndex}`
+        }
+    );
 });
 
-  let chains = {chain:[]}
+app.get('/mine', function (req, res) {
+    const latestBlock = bitcoin.getLatestBlock();
+    const prevBlockHash = latestBlock.hash;
+    const currentBlockData = {
+        transactions: bitcoin.pendingTransactions,
+        index: latestBlock.index + 1
+    }
+    const nonce = bitcoin.proofOfWork(prevBlockHash, currentBlockData);
+    const blockHash = bitcoin.hashBlock(prevBlockHash, currentBlockData, nonce);
 
-app.listen(3000, () => console.log("PORT 3000"));
+    // reward for mining
+    // bitcoin.makeNewTransaction(1, '00000', nodeAddr);
+
+    const newBlock = bitcoin.creatNewBlock(nonce, prevBlockHash, blockHash)
+    res.json(
+        {
+            message: 'Mining new Block successfully!',
+            newBlock
+        }
+    );
+});
+
+app.listen(3000, function () {
+
+    console.log('> listening on port 3000...');
+});
